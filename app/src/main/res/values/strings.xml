@@ -1,4 +1,16 @@
 <resources>
-    <string name="app_name">ECyD</string>
+    <string name="app_name">We're ECyD</string>
     <string name="action_settings">Settings</string>
+
+    <!--EditText-->
+    <string name="username_input_hint">Username</string>
+    <string name="password_input_hint">Password</string>
+
+    <!--Text-->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+
+    <!--Errors-->
+    <string name="username_input_error">Please enter a username</string>
+    <string name="password_input_error">Please enter a password</string>
 </resources>

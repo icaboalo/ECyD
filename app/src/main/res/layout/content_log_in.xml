@@ -25,7 +25,7 @@
                 android:id="@+id/username_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="@string/username_input_hint"
                 android:inputType="textPersonName"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -38,7 +38,7 @@
                 android:id="@+id/password_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password_input_hint"
                 android:inputType="textPassword"/>
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -49,8 +49,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="8dp"
-        android:text="Iniciar Sesion"
-        android:textSize="24sp"/>
+        android:text="@string/login"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/register"
@@ -58,7 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|bottom"
         android:layout_margin="8dp"
-        android:text="Registrarse"
-        android:textSize="24sp"/>
+        android:text="@string/register"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
 </FrameLayout>

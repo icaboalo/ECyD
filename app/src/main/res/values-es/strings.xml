@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Somos ECyD</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="password_input_hint">Contraseña</string>
+    <string name="register">Registrarse</string>
+    <string name="username_input_hint">Usuario</string>
+    <string name="password_input_error">Por favor ingresa una contraseña</string>
+    <string name="username_input_error">Por favor ingresa un usuario</string>
+</resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">We're ECyD</string>
+    <string name="app_name">We\'re ECyD</string>
     <string name="action_settings">Settings</string>
 
     <!--EditText-->

@@ -9,6 +9,9 @@ import android.widget.EditText;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.util.VUtil;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,8 +36,16 @@ public class LogInActivity extends AppCompatActivity {
 
     @OnClick(R.id.login) void login(){
         if (formFilled()){
-//            Intent goToMain = new Intent(this, MainActivity.class);
-//            startActivity(goToMain);
+            ParseUser.logInInBackground(VUtil.extractEditText(mUsernameInput), VUtil.extractEditText(mPasswordInput), new LogInCallback() {
+                @Override
+                public void done(ParseUser parseUser, ParseException e) {
+                    if (e != null) {
+//                        TODO MainActivity
+//                        Intent goToMain = new Intent(LogInActivity.this, MainActivity.class);
+//                        startActivity(goToMain);
+                    }
+                }
+            });
         }else {
             mUsernameInput.setError(getString(R.string.username_input_error));
             mPasswordInput.setError(getString(R.string.password_input_error));

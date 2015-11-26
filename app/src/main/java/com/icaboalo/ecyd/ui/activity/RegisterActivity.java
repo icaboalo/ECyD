@@ -12,6 +12,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -34,6 +35,25 @@ public class RegisterActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    @OnClick(R.id.fab) void signUp(){
+        if (isFormFilled() && passwordsMatch()){
+//            go on...
+        }else if (isNameEmpty()){
+            mNameInput.setError("Please enter a Name");
+        }
+        else if (isUsernameEmpty()){
+            mUsernameInput.setError(getString(R.string.username_input_error));
+        }else if (isPasswordEmpty()){
+            ButterKnife.apply(mPasswordsInput, EMPTY_ERROR);
+        }else if (!passwordsMatch()){
+            ButterKnife.apply(mPasswordsInput, MATCH_ERROR);
+        }
+    }
+
+    private boolean isFormFilled(){
+        return !(isNameEmpty() || isUsernameEmpty() || isPasswordEmpty());
+    }
+
     private boolean isNameEmpty(){
         return VUtil.extractEditText(mNameInput).isEmpty();
     }
@@ -54,5 +74,19 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean passwordsMatch(){
         return VUtil.extractEditText(mPasswordsInput.get(0)).contentEquals(VUtil.extractEditText(mPasswordsInput.get(1)));
     }
+
+    private final ButterKnife.Action<EditText> EMPTY_ERROR = new ButterKnife.Action<EditText>() {
+        @Override
+        public void apply(EditText view, int index) {
+            view.setError(getString(R.string.password_input_error));
+        }
+    };
+
+    private final ButterKnife.Action<EditText> MATCH_ERROR = new ButterKnife.Action<EditText>() {
+        @Override
+        public void apply(EditText view, int index) {
+            view.setError(getString(R.string.password_input_match_error));
+        }
+    };
 
 }

@@ -16,4 +16,5 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="name_input_hint">Name</string>
     <string name="password_cofirm_input">Confirm Password</string>
+    <string name="password_input_match_error">Passwords don\'t match</string>
 </resources>

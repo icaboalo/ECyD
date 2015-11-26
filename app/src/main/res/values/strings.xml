@@ -13,4 +13,7 @@
     <!--Errors-->
     <string name="username_input_error">Please enter a username</string>
     <string name="password_input_error">Please enter a password</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="name_input_hint">Name</string>
+    <string name="password_cofirm_input">Confirm Password</string>
 </resources>

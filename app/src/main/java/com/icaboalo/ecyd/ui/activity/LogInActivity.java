@@ -1,11 +1,13 @@
 package com.icaboalo.ecyd.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.util.VUtil;
@@ -39,10 +41,12 @@ public class LogInActivity extends AppCompatActivity {
             ParseUser.logInInBackground(VUtil.extractEditText(mUsernameInput), VUtil.extractEditText(mPasswordInput), new LogInCallback() {
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
-                    if (e != null) {
+                    if (parseUser != null) {
 //                        TODO MainActivity
 //                        Intent goToMain = new Intent(LogInActivity.this, MainActivity.class);
 //                        startActivity(goToMain);
+                    }else {
+                        Toast.makeText(LogInActivity.this, e +" ", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -53,8 +57,8 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.register) void register(){
-//        Intent goToRegister = new Intent(this, RegisterActivity.class);
-//        startActivity(goToRegister);
+        Intent goToRegister = new Intent(this, RegisterActivity.class);
+        startActivity(goToRegister);
     }
 
     @Override

@@ -2,12 +2,12 @@ package com.icaboalo.ecyd.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.util.VUtil;
@@ -27,6 +27,9 @@ public class LogInActivity extends AppCompatActivity {
     @Bind(R.id.password_input)
     EditText mPasswordInput;
 
+    @Bind(R.id.container)
+    CoordinatorLayout mContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,20 +39,9 @@ public class LogInActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.login) void login(){
+    @OnClick(R.id.login) void loginButton(){
         if (formFilled()){
-            ParseUser.logInInBackground(VUtil.extractEditText(mUsernameInput), VUtil.extractEditText(mPasswordInput), new LogInCallback() {
-                @Override
-                public void done(ParseUser parseUser, ParseException e) {
-                    if (parseUser != null) {
-//                        TODO MainActivity
-//                        Intent goToMain = new Intent(LogInActivity.this, MainActivity.class);
-//                        startActivity(goToMain);
-                    }else {
-                        Toast.makeText(LogInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            login();
         }else {
             mUsernameInput.setError(getString(R.string.username_input_error));
             mPasswordInput.setError(getString(R.string.password_input_error));
@@ -81,6 +73,22 @@ public class LogInActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void login(){
+        ParseUser.logInInBackground(VUtil.extractEditText(mUsernameInput), VUtil.extractEditText(mPasswordInput), new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (parseUser != null) {
+//                        TODO MainActivity
+//                        Intent goToMain = new Intent(LogInActivity.this, MainActivity.class);
+//                        startActivity(goToMain);
+                    VUtil.showMessage(LogInActivity.this, getString(R.string.login_message) + " " + parseUser.getUsername(), mContainer);
+                } else {
+                    VUtil.showMessage(LogInActivity.this, e.getMessage(), mContainer);
+                }
+            }
+        });
     }
 
     private boolean isUsernameEmpty(){

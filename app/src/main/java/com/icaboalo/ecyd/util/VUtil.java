@@ -15,10 +15,10 @@ public class VUtil {
 
     public static void showMessage(Context context, int StringId, View container){
         String message = context.getString(StringId);
-        Snackbar.make(container, message, Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(container, message, Snackbar.LENGTH_LONG).show();
     }
 
     public static void showMessage(Context context, String message, View container){
-        Snackbar.make(container, message, Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(container, message, Snackbar.LENGTH_LONG).show();
     }
 }

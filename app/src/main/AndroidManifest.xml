@@ -31,6 +31,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.icaboalo.ecyd.ui.activity.LogInActivity" />
         </activity>
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

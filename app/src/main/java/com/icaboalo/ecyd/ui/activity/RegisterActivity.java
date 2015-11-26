@@ -1,12 +1,16 @@
 package com.icaboalo.ecyd.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.util.VUtil;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import java.util.List;
 
@@ -25,6 +29,9 @@ public class RegisterActivity extends AppCompatActivity {
     @Bind({R.id.password_input, R.id.password_confirm_input})
     List<EditText> mPasswordsInput;
 
+    @Bind(R.id.container)
+    CoordinatorLayout mContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.fab) void signUp(){
+    @OnClick(R.id.fab) void signUpButton(){
         if (isFormFilled() && passwordsMatch()){
-//            go on...
+            signUp();
         }else if (isNameEmpty()){
             mNameInput.setError("Please enter a Name");
         }
@@ -48,6 +55,24 @@ public class RegisterActivity extends AppCompatActivity {
         }else if (!passwordsMatch()){
             ButterKnife.apply(mPasswordsInput, MATCH_ERROR);
         }
+    }
+
+    public void signUp(){
+        ParseUser user = new ParseUser();
+        user.setUsername(VUtil.extractEditText(mUsernameInput));
+        user.setPassword(VUtil.extractEditText(mPasswordsInput.get(0)));
+        user.put("Name", VUtil.extractEditText(mNameInput));
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null){
+//                    TODO goToMain
+                    VUtil.showMessage(RegisterActivity.this, R.string.register_message, mContainer);
+                }else {
+                    VUtil.showMessage(RegisterActivity.this, e.getMessage(), mContainer);
+                }
+            }
+        });
     }
 
     private boolean isFormFilled(){

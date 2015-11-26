@@ -46,7 +46,7 @@ public class LogInActivity extends AppCompatActivity {
 //                        Intent goToMain = new Intent(LogInActivity.this, MainActivity.class);
 //                        startActivity(goToMain);
                     }else {
-                        Toast.makeText(LogInActivity.this, e +" ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

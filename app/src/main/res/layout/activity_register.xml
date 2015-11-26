@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/container"
-    tools:context=".LogInActivity">
+    tools:context="com.icaboalo.ecyd.ui.activity.RegisterActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
@@ -17,5 +17,14 @@
         <include layout="@layout/app_bar" android:id="@+id/app_bar"/>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_log_in"/>
+    <include layout="@layout/content_register"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_media_play"/>
+
 </android.support.design.widget.CoordinatorLayout>

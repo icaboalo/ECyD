@@ -2,15 +2,23 @@
     <string name="app_name">We\'re ECyD</string>
     <string name="action_settings">Settings</string>
 
+    <!--Activities-->
+    <string name="title_activity_register" translatable="false">RegisterActivity</string>
+
     <!--EditText-->
     <string name="username_input_hint">Username</string>
     <string name="password_input_hint">Password</string>
+    <string name="password_cofirm_input_hint">Confirm Password</string>
+    <string name="name_input_hint">Name</string>
 
     <!--Text-->
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="register_message">New user registered</string>
+    <string name="login_message">Welcome back </string>
 
     <!--Errors-->
     <string name="username_input_error">Please enter a username</string>
     <string name="password_input_error">Please enter a password</string>
+    <string name="password_input_match_error">Passwords don\'t match</string>
 </resources>

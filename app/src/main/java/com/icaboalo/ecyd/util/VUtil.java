@@ -27,4 +27,8 @@ public class VUtil {
         Intent intent = new Intent(context, classToGo);
         context.startActivity(intent);
     }
+
+    public static View inflateView(Context context, int layout){
+        return View.inflate(context, layout, null);
+    }
 }

@@ -2,6 +2,7 @@ package com.icaboalo.ecyd.ui.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.View;
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.domain.TeamModel;
 import com.icaboalo.ecyd.ui.adapter.TeamRecyclerAdapter;
+import com.icaboalo.ecyd.ui.fragment.dialog.AddTeamDialog;
 import com.icaboalo.ecyd.util.VUtil;
 import com.icaboalo.ecyd.util.ViewHolderClick;
 import com.parse.FindCallback;
@@ -53,7 +55,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.fab) void addTeam(){
-        
+        showDialog();
+    }
+
+    private void showDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        AddTeamDialog addTeamDialog = new AddTeamDialog().newInstance();
+        addTeamDialog.show(fragmentManager, "AddTeam");
     }
 
     @Override

@@ -81,8 +81,9 @@ public class LogInActivity extends AppCompatActivity {
             public void done(ParseUser parseUser, ParseException e) {
                 if (parseUser != null) {
 //                        TODO MainActivity
-//                        Intent goToMain = new Intent(LogInActivity.this, MainActivity.class);
-//                        startActivity(goToMain);
+                        Intent goToMain = new Intent(LogInActivity.this, MainActivity.class);
+                        startActivity(goToMain);
+                        finish();
                     VUtil.showMessage(LogInActivity.this, getString(R.string.login_message) + " " + parseUser.getUsername(), mContainer);
                 } else {
                     VUtil.showMessage(LogInActivity.this, e.getMessage(), mContainer);

@@ -23,4 +23,5 @@
     <string name="password_input_error">Please enter a password</string>
     <string name="password_input_match_error">Passwords don\'t match</string>
     <string name="action_log_out">Log out</string>
+    <string name="team_name_input_hint">Team name</string>
 </resources>

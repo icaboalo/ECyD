@@ -1,6 +1,7 @@
 package com.icaboalo.ecyd.ui.fragment.dialog;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,12 +9,15 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.domain.ParseModel;
 import com.icaboalo.ecyd.util.VUtil;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,11 +30,8 @@ public class AddTeamDialog extends DialogFragment {
     @Bind(R.id.team_name_input)
     EditText mTeamNameInput;
 
-    public static AddTeamDialog newInstance(String title){
+    public static AddTeamDialog newInstance(){
         AddTeamDialog fragment = new AddTeamDialog();
-        Bundle args = new Bundle();
-        args.putString("title", title);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -46,10 +47,11 @@ public class AddTeamDialog extends DialogFragment {
 
     void configureDialog(AlertDialog.Builder alertDialog, View view){
         alertDialog.setView(view);
+        alertDialog.setTitle(getString(R.string.dialog_add_team_title));
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                pushToParse(VUtil.extractEditText(mTeamNameInput));
+                pushToParse(getActivity(), VUtil.extractEditText(mTeamNameInput));
             }
         });
         alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -61,9 +63,17 @@ public class AddTeamDialog extends DialogFragment {
         alertDialog.setCancelable(false);
     }
 
-    void pushToParse(String teamName){
+    void pushToParse(final Context context, String teamName){
         ParseObject team = new ParseObject(ParseModel.TEAM_CLASS);
         team.put(ParseModel.TEAM_NAME_COLUMN, teamName);
-        team.put(ParseModel.USER_COLUMN, ParseUser.getCurrentUser());
+        team.put(ParseModel.USER_COLUMN, ParseUser.getCurrentUser().getUsername());
+        team.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null){
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 }

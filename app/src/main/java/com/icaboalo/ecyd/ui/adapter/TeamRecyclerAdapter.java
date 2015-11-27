@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.domain.TeamModel;
+import com.icaboalo.ecyd.util.ViewHolderClick;
 
 import java.util.List;
 
@@ -20,17 +21,19 @@ public class TeamRecyclerAdapter extends RecyclerView.Adapter<TeamRecyclerAdapte
     Context mContext;
     LayoutInflater mInflater;
     List<TeamModel> mTeamModelList;
+    ViewHolderClick mViewHolderClick;
 
-    public TeamRecyclerAdapter(Context context, List<TeamModel> teamModelList) {
+    public TeamRecyclerAdapter(Context context, List<TeamModel> teamModelList, ViewHolderClick onClickListener) {
         mContext = context;
         mTeamModelList = teamModelList;
+        mViewHolderClick = onClickListener;
         mInflater = LayoutInflater.from(mContext);
     }
 
     @Override
     public MyTeamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item_list_team, parent, false);
-        return new MyTeamViewHolder(view, R.id.team_name);
+        return new MyTeamViewHolder(view, R.id.team_name, mViewHolderClick);
     }
 
     @Override
@@ -39,27 +42,30 @@ public class TeamRecyclerAdapter extends RecyclerView.Adapter<TeamRecyclerAdapte
         holder.setTeamName(teamModel.getTeamName());
     }
 
-    public void changeData(List<TeamModel> newTeamList){
-        mTeamModelList = newTeamList;
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getItemCount() {
         return mTeamModelList.size();
     }
 
-    class MyTeamViewHolder extends RecyclerView.ViewHolder{
+    class MyTeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mTeamName;
+        ViewHolderClick mViewHolderClick;
 
-        public MyTeamViewHolder(View itemView, int teamNameId) {
+        public MyTeamViewHolder(View itemView, int teamNameId, ViewHolderClick onClickListener) {
             super(itemView);
             mTeamName = (TextView) itemView.findViewById(teamNameId);
+            mViewHolderClick = onClickListener;
+            itemView.setOnClickListener(this);
         }
 
         public void setTeamName(String teamName) {
             mTeamName.setText(teamName);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mViewHolderClick.onClick(v, getAdapterPosition());
         }
     }
 }

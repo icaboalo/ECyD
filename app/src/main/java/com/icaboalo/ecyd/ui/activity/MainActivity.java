@@ -8,11 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.domain.TeamModel;
 import com.icaboalo.ecyd.ui.adapter.TeamRecyclerAdapter;
 import com.icaboalo.ecyd.util.VUtil;
+import com.icaboalo.ecyd.util.ViewHolderClick;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -65,12 +67,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
-                    List<TeamModel> newTeamList = new ArrayList<TeamModel>();
+                    final List<TeamModel> newTeamList = new ArrayList<TeamModel>();
                     for (int i = 0; i < list.size(); i++) {
                         String item = list.get(i).getString("team_name");
                         newTeamList.add(new TeamModel(item));
                     }
-                    mRecyclerAdapter = new TeamRecyclerAdapter(MainActivity.this, newTeamList);
+                    mRecyclerAdapter = new TeamRecyclerAdapter(MainActivity.this, newTeamList, new ViewHolderClick() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            Toast.makeText(MainActivity.this, newTeamList.get(position).getTeamName(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     mTeamList.setAdapter(mRecyclerAdapter);
                 }
             }

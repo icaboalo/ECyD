@@ -19,7 +19,7 @@ public class VUtil {
         Snackbar.make(container, message, Snackbar.LENGTH_LONG).show();
     }
 
-    public static void showMessage(Context context, String message, View container){
+    public static void showMessage(String message, View container){
         Snackbar.make(container, message, Snackbar.LENGTH_LONG).show();
     }
 

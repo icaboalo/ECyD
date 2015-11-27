@@ -66,10 +66,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if (e == null){
-//                    TODO goToMain
                     VUtil.showMessage(RegisterActivity.this, R.string.register_message, mContainer);
+                    VUtil.goToActivity(RegisterActivity.this, MainActivity.class);
+                    finish();
                 }else {
-                    VUtil.showMessage(RegisterActivity.this, e.getMessage(), mContainer);
+                    VUtil.showMessage(e.getMessage(), mContainer);
                 }
             }
         });

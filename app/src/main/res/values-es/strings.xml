@@ -12,5 +12,9 @@
     <string name="password_cofirm_input_hint">Confirmar contraseña</string>
     <string name="password_input_match_error">Las contraseñas no coinciden</string>
     <string name="register_message">Nuevo usuario registrado</string>
-    <string name="title_activity_register">Somos ECyD</string>
+    <string name="action_log_out">Cerrar sesión</string>
+    <string name="dialog_add_team_title">Añadir Equipo</string>
+    <string name="login_message">Bienvenido de vuelta</string>
+    <string name="team_name_input_hint">Nombre equipo</string>
+    <string name="title_activity_main">Somos ECyD</string>
 </resources>

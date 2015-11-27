@@ -4,6 +4,7 @@
 
     <!--Activities-->
     <string name="title_activity_register" translatable="false">RegisterActivity</string>
+    <string name="title_activity_main">We\'re ECyD</string>
 
     <!--EditText-->
     <string name="username_input_hint">Username</string>
@@ -21,4 +22,5 @@
     <string name="username_input_error">Please enter a username</string>
     <string name="password_input_error">Please enter a password</string>
     <string name="password_input_match_error">Passwords don\'t match</string>
+    <string name="action_log_out">Log out</string>
 </resources>

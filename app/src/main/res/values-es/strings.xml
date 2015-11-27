@@ -12,5 +12,5 @@
     <string name="password_cofirm_input_hint">Confirmar contraseña</string>
     <string name="password_input_match_error">Las contraseñas no coinciden</string>
     <string name="register_message">Nuevo usuario registrado</string>
-    <string name="title_activity_register"></string>
+    <string name="title_activity_register">Somos ECyD</string>
 </resources>

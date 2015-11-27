@@ -1,6 +1,7 @@
 package com.icaboalo.ecyd.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.EditText;
@@ -20,5 +21,10 @@ public class VUtil {
 
     public static void showMessage(Context context, String message, View container){
         Snackbar.make(container, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    public static void goToActivity(Context context, Class classToGo){
+        Intent intent = new Intent(context, classToGo);
+        context.startActivity(intent);
     }
 }

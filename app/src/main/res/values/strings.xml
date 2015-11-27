@@ -29,4 +29,5 @@
     <string name="username_input_error">Please enter a username</string>
     <string name="password_input_error">Please enter a password</string>
     <string name="password_input_match_error">Passwords don\'t match</string>
+    <string name="title_activity_team_info">TeamInfoActivity</string>
 </resources>

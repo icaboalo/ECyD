@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.domain.TeamModel;
+import com.icaboalo.ecyd.domain.constant.SharedPreferencesConstants;
 import com.icaboalo.ecyd.ui.adapter.TeamRecyclerAdapter;
 import com.icaboalo.ecyd.ui.fragment.dialog.AddTeamDialog;
 import com.icaboalo.ecyd.util.VUtil;
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view, int position) {
                             saveOnSharedPrefeces(newTeamList.get(position).getTeamName());
+                            VUtil.goToActivity(MainActivity.this, TeamInfoActivity.class);
                         }
                     });
                     mTeamList.setAdapter(mRecyclerAdapter);
@@ -120,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveOnSharedPrefeces(String team){
-        SharedPreferences sharedPreferences = getSharedPreferences("team", MODE_PRIVATE);
-        sharedPreferences.edit().putString("teamName", team).apply();
+        SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferencesConstants.FILE__TEAM, MODE_PRIVATE);
+        sharedPreferences.edit().putString(SharedPreferencesConstants.TEAM_NAME, team).apply();
     }
 }

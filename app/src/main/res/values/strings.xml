@@ -4,13 +4,14 @@
 
     <!--Activities-->
     <string name="title_activity_register" translatable="false">RegisterActivity</string>
-    <string name="title_activity_main">We\'re ECyD</string>
+    <string name="title_activity_main">Somos ECyD</string>
 
     <!--EditText-->
     <string name="username_input_hint">Username</string>
     <string name="password_input_hint">Password</string>
     <string name="password_cofirm_input_hint">Confirm Password</string>
     <string name="name_input_hint">Name</string>
+    <string name="team_name_input_hint">Team name</string>
 
     <!--Text-->
     <string name="login">Login</string>
@@ -18,11 +19,15 @@
     <string name="register_message">New user registered</string>
     <string name="login_message">Welcome back </string>
 
+    <!--Menu Actions-->
+    <string name="action_log_out">Log out</string>
+
+    <!--Dialogs-->
+    <string name="dialog_add_team_title">Add Team</string>
+
     <!--Errors-->
     <string name="username_input_error">Please enter a username</string>
     <string name="password_input_error">Please enter a password</string>
     <string name="password_input_match_error">Passwords don\'t match</string>
-    <string name="action_log_out">Log out</string>
-    <string name="team_name_input_hint">Team name</string>
-    <string name="dialog_add_team_title">Add Team</string>
+    <string name="title_activity_team_info">TeamInfoActivity</string>
 </resources>

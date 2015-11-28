@@ -7,4 +7,6 @@ public class ParseModel {
     public static final String TEAM_CLASS = "Teams";
     public static final String TEAM_NAME_COLUMN = "team_name";
     public static final String USER_COLUMN = "user";
+
+    public static final String KID_CLASS = "Kids";
 }

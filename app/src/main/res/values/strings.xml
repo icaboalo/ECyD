@@ -31,4 +31,5 @@
     <string name="password_input_match_error">Passwords don\'t match</string>
     <string name="title_activity_team_info">TeamInfoActivity</string>
     <string name="dialog_add_kid_title">Add kid</string>
+    <string name="kid_name_input_hint">Kid name</string>
 </resources>

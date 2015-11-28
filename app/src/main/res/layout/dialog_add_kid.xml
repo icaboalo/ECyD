@@ -31,6 +31,5 @@
         android:layout_below="@+id/kid_name_input_container"
         android:layout_toEndOf="@id/kid_image_input"
         android:layout_toRightOf="@id/kid_image_input">
-
     </Spinner>
 </RelativeLayout>

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveOnSharedPrefeces(String team){
-        SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferencesConstants.FILE__TEAM, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferencesConstants.FILE_TEAM, MODE_PRIVATE);
         sharedPreferences.edit().putString(SharedPreferencesConstants.TEAM_NAME, team).apply();
     }
 }

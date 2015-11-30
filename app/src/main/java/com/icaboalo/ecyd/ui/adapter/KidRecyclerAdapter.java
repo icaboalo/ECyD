@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.domain.KidModel;
+import com.icaboalo.ecyd.util.ViewHolderClick;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +23,19 @@ public class KidRecyclerAdapter extends RecyclerView.Adapter<KidRecyclerAdapter.
     List<KidModel> mKidList = new ArrayList<>();
     Context mContext;
     LayoutInflater mInflater;
+    ViewHolderClick mHolderClick;
 
-    public KidRecyclerAdapter(List<KidModel> kidList, Context context) {
+    public KidRecyclerAdapter(List<KidModel> kidList, Context context, ViewHolderClick onClickListener) {
         mKidList = kidList;
         mContext = context;
+        mHolderClick = onClickListener;
         mInflater = LayoutInflater.from(mContext);
     }
 
     @Override
     public MyKidViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item_list_kid, parent, false);
-        return new MyKidViewHolder(view, R.id.kid_name, R.id.kid_image);
+        return new MyKidViewHolder(view, R.id.kid_name, R.id.kid_image, mHolderClick);
     }
 
     @Override
@@ -46,19 +49,27 @@ public class KidRecyclerAdapter extends RecyclerView.Adapter<KidRecyclerAdapter.
         return mKidList.size();
     }
 
-    public class MyKidViewHolder extends RecyclerView.ViewHolder{
+    public class MyKidViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView mKidName;
         ImageView mKidImage;
+        ViewHolderClick mHolderClick;
 
-        public MyKidViewHolder(View itemView, int kidNameId, int kidImageId) {
+        public MyKidViewHolder(View itemView, int kidNameId, int kidImageId, ViewHolderClick onClickListener) {
             super(itemView);
             mKidName = (TextView) itemView.findViewById(kidNameId);
             mKidImage = (ImageView) itemView.findViewById(kidImageId);
+            mHolderClick = onClickListener;
+            itemView.setOnClickListener(this);
         }
 
         public void setKidName(String kidName) {
             mKidName.setText(kidName);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mHolderClick.onClick(v, getAdapterPosition());
         }
     }
 }

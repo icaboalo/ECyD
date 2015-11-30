@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.domain.KidModel;
@@ -15,6 +16,7 @@ import com.icaboalo.ecyd.domain.ParseModel;
 import com.icaboalo.ecyd.domain.constant.SharedPreferencesConstants;
 import com.icaboalo.ecyd.ui.adapter.KidRecyclerAdapter;
 import com.icaboalo.ecyd.ui.fragment.dialog.AddKidDialog;
+import com.icaboalo.ecyd.util.ViewHolderClick;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -75,7 +77,12 @@ public class TeamInfoActivity extends AppCompatActivity {
                         String kidName = list.get(i).getString("kid_name");
                         newKidList.add(new KidModel(kidName));
                     }
-                    mKidRecyclerAdapter = new KidRecyclerAdapter(newKidList, TeamInfoActivity.this);
+                    mKidRecyclerAdapter = new KidRecyclerAdapter(newKidList, TeamInfoActivity.this, new ViewHolderClick() {
+                        @Override
+                        public void onClick(View view, int position) {
+
+                        }
+                    });
                     mKidList.setAdapter(mKidRecyclerAdapter);
                 }
             }

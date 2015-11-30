@@ -16,6 +16,7 @@ import com.icaboalo.ecyd.domain.ParseModel;
 import com.icaboalo.ecyd.domain.constant.SharedPreferencesConstants;
 import com.icaboalo.ecyd.ui.adapter.KidRecyclerAdapter;
 import com.icaboalo.ecyd.ui.fragment.dialog.AddKidDialog;
+import com.icaboalo.ecyd.ui.fragment.dialog.KidInfoDialog;
 import com.icaboalo.ecyd.util.ViewHolderClick;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -82,6 +83,7 @@ public class TeamInfoActivity extends AppCompatActivity {
                         public void onClick(View view, int position) {
                             String kidName = newKidList.get(position).getKidName();
                             saveOnSharedPrefs(kidName);
+                            showDialogKidInfo();
                         }
                     });
                     mKidList.setAdapter(mKidRecyclerAdapter);
@@ -99,6 +101,12 @@ public class TeamInfoActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         AddKidDialog addKidDialog = new AddKidDialog().newInstance();
         addKidDialog.show(fragmentManager, "AddKid");
+    }
+
+    void showDialogKidInfo(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        KidInfoDialog kidInfoDialog = new KidInfoDialog().newInstance();
+        kidInfoDialog.show(fragmentManager, "KidInfo");
     }
 
     void saveOnSharedPrefs(String kidName){

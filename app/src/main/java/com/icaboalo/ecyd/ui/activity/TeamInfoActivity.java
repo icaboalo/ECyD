@@ -2,6 +2,7 @@ package com.icaboalo.ecyd.ui.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import com.icaboalo.ecyd.domain.KidModel;
 import com.icaboalo.ecyd.domain.ParseModel;
 import com.icaboalo.ecyd.domain.constant.SharedPreferencesConstants;
 import com.icaboalo.ecyd.ui.adapter.KidRecyclerAdapter;
+import com.icaboalo.ecyd.ui.fragment.dialog.AddKidDialog;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TeamInfoActivity extends AppCompatActivity {
 
@@ -47,6 +50,10 @@ public class TeamInfoActivity extends AppCompatActivity {
         super.onResume();
         setupRecycler();
         getKids();
+    }
+
+    @OnClick(R.id.fab) void addKid(){
+        showDialog();
     }
 
     void setupRecycler(){
@@ -78,5 +85,11 @@ public class TeamInfoActivity extends AppCompatActivity {
     String getTeamName(){
         SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferencesConstants.FILE_TEAM, MODE_PRIVATE);
         return sharedPreferences.getString(SharedPreferencesConstants.TEAM_NAME, "");
+    }
+
+    void showDialog(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        AddKidDialog addKidDialog = new AddKidDialog().newInstance();
+        addKidDialog.show(fragmentManager, "AddKid");
     }
 }

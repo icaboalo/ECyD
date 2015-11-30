@@ -9,4 +9,5 @@ public class ParseModel {
     public static final String USER_COLUMN = "user";
 
     public static final String KID_CLASS = "Kids";
+    public static final String KID_NAME_COLUMN = "kid_name";
 }

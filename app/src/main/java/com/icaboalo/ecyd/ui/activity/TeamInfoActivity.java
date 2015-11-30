@@ -54,7 +54,7 @@ public class TeamInfoActivity extends AppCompatActivity {
         getKids();
     }
 
-    @OnClick(R.id.fab) void addKid(){
+    @OnClick(R.id.fab) void addKidButton(){
         showDialog();
     }
 
@@ -72,7 +72,7 @@ public class TeamInfoActivity extends AppCompatActivity {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
-                    List<KidModel> newKidList = new ArrayList<>();
+                    final List<KidModel> newKidList = new ArrayList<>();
                     for (int i = 0; i < list.size(); i++) {
                         String kidName = list.get(i).getString("kid_name");
                         newKidList.add(new KidModel(kidName));
@@ -80,7 +80,8 @@ public class TeamInfoActivity extends AppCompatActivity {
                     mKidRecyclerAdapter = new KidRecyclerAdapter(newKidList, TeamInfoActivity.this, new ViewHolderClick() {
                         @Override
                         public void onClick(View view, int position) {
-
+                            String kidName = newKidList.get(position).getKidName();
+                            saveOnSharedPrefs(kidName);
                         }
                     });
                     mKidList.setAdapter(mKidRecyclerAdapter);
@@ -98,5 +99,10 @@ public class TeamInfoActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         AddKidDialog addKidDialog = new AddKidDialog().newInstance();
         addKidDialog.show(fragmentManager, "AddKid");
+    }
+
+    void saveOnSharedPrefs(String kidName){
+        SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferencesConstants.FILE_KID, MODE_PRIVATE);
+        sharedPreferences.edit().putString(SharedPreferencesConstants.KID_NAME, kidName).apply();
     }
 }

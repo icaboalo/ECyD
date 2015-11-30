@@ -6,4 +6,7 @@ package com.icaboalo.ecyd.domain.constant;
 public class SharedPreferencesConstants {
     public static final String FILE_TEAM = "team";
     public static final String TEAM_NAME = "team_name";
+
+    public static final String FILE_KID = "kid";
+    public static final String KID_NAME = "kid_name";
 }

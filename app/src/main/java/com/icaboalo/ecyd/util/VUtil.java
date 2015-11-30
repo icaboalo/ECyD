@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by icaboalo on 11/24/2015.
@@ -30,5 +31,9 @@ public class VUtil {
 
     public static View inflateView(Context context, int layout){
         return View.inflate(context, layout, null);
+    }
+
+    public static void setText(TextView textView, String text){
+        textView.setText(text);
     }
 }

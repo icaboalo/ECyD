@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/kid_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/kid_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_toEndOf="@+id/kid_image"
+        android:layout_toRightOf="@+id/kid_image"
+        android:textSize="28sp"/>
+
+    <TextView
+        android:id="@+id/team_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kid_name"
+        android:layout_toEndOf="@+id/kid_image"
+        android:layout_toRightOf="@+id/kid_image"
+        android:textSize="28sp"/>
+
+    <LinearLayout
+        android:id="@+id/assistance_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kid_image">
+
+        <CheckedTextView
+            android:id="@+id/assistance_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="test checktext"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/talk_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/assistance_container">
+
+        <CheckedTextView
+            android:id="@+id/talk_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="test checktext"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

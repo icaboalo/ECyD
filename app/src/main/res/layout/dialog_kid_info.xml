@@ -35,12 +35,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/kid_image">
 
-        <CheckedTextView
-            android:id="@+id/assistance_check"
+        <CheckBox
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/assistance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="test checktext"
+            android:text="@string/assistance"
             android:textSize="24sp"/>
     </LinearLayout>
 
@@ -50,12 +54,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/assistance_container">
 
-        <CheckedTextView
-            android:id="@+id/talk_check"
+        <CheckBox
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/talk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="test checktext"
+            android:text="@string/talk"
             android:textSize="24sp"/>
     </LinearLayout>
 

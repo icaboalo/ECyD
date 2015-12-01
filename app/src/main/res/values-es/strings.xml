@@ -17,4 +17,8 @@
     <string name="login_message">Bienvenido de vuelta</string>
     <string name="team_name_input_hint">Nombre equipo</string>
     <string name="title_activity_main">Somos ECyD</string>
+    <string name="dialog_add_kid_title">Añadir niño</string>
+    <string name="kid_name_input_hint">Nombre niño</string>
+    <string name="assistance">Asistencia</string>
+    <string name="talk">Dialogo Semanal</string>
 </resources>

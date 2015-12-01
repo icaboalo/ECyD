@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,5 +36,9 @@ public class VUtil {
 
     public static void setText(TextView textView, String text){
         textView.setText(text);
+    }
+
+    public static void setChecked(CheckBox checkBox, boolean checked){
+        checkBox.setChecked(checked);
     }
 }

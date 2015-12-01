@@ -36,6 +36,7 @@
         android:layout_below="@+id/kid_image">
 
         <CheckBox
+            android:id="@+id/assistance_checkbox"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -55,6 +56,7 @@
         android:layout_below="@+id/assistance_container">
 
         <CheckBox
+            android:id="@+id/talk_checkbox"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

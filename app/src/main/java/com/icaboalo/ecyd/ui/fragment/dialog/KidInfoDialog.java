@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.icaboalo.ecyd.R;
@@ -16,6 +17,7 @@ import com.icaboalo.ecyd.domain.ParseModel;
 import com.icaboalo.ecyd.domain.constant.SharedPreferencesConstants;
 import com.icaboalo.ecyd.util.VUtil;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -30,11 +32,19 @@ import butterknife.ButterKnife;
  */
 public class KidInfoDialog extends DialogFragment {
 
+    String objectId;
+
     @Bind(R.id.kid_name)
     TextView mKidName;
 
     @Bind(R.id.team_name)
     TextView mTeamName;
+
+    @Bind(R.id.assistance_checkbox)
+    CheckBox mAssistance;
+
+    @Bind(R.id.talk_checkbox)
+    CheckBox mTalk;
 
     public static KidInfoDialog newInstance(){
         KidInfoDialog fragment = new KidInfoDialog();
@@ -58,6 +68,7 @@ public class KidInfoDialog extends DialogFragment {
         alertDialog.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                saveOnParse();
             }
         });
         alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -69,16 +80,36 @@ public class KidInfoDialog extends DialogFragment {
         alertDialog.setCancelable(true);
     }
 
+    private void saveOnParse() {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseModel.KID_CLASS);
+        query.getInBackground(objectId, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject parseObject, ParseException e) {
+                if (e == null){
+                    parseObject.put(ParseModel.TALK_COLUMN, mTalk.isChecked());
+                    parseObject.put(ParseModel.ASSISTANCE_COLUMN, mAssistance.isChecked());
+                }
+            }
+        });
+    }
+
     void getFromParse(String kidName){
         ParseQuery<ParseObject> query = new ParseQuery<>(ParseModel.KID_CLASS).whereContains(ParseModel.KID_NAME_COLUMN, kidName);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
-                for (int i = 0; i < list.size(); i++) {
-                    String kidName = list.get(i).getString(ParseModel.KID_NAME_COLUMN);
-                    String teamName = list.get(i).getString(ParseModel.TEAM_NAME_COLUMN);
-                    VUtil.setText(mKidName, kidName);
-                    VUtil.setText(mTeamName, teamName);
+                if (e == null){
+                    for (int i = 0; i < list.size(); i++) {
+                        objectId = list.get(i).getObjectId();
+                        String kidName = list.get(i).getString(ParseModel.KID_NAME_COLUMN);
+                        String teamName = list.get(i).getString(ParseModel.TEAM_NAME_COLUMN);
+                        boolean assistance = list.get(i).getBoolean(ParseModel.ASSISTANCE_COLUMN);
+                        boolean talk = list.get(i).getBoolean(ParseModel.TALK_COLUMN);
+                        VUtil.setText(mKidName, kidName);
+                        VUtil.setText(mTeamName, teamName);
+                        VUtil.setChecked(mAssistance, assistance);
+                        VUtil.setChecked(mTalk, talk);
+                    }
                 }
             }
         });

@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.icaboalo.ecyd.R;
 import com.icaboalo.ecyd.domain.ParseModel;
@@ -21,6 +22,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -63,7 +65,7 @@ public class KidInfoDialog extends DialogFragment {
 
     void configureDialog(AlertDialog.Builder alertDialog, View view){
         alertDialog.setView(view);
-        getFromParse(getKid());
+        getKidFromParse(getKid());
         alertDialog.setTitle(getString(R.string.dialog_add_team_title));
         alertDialog.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
             @Override
@@ -81,19 +83,27 @@ public class KidInfoDialog extends DialogFragment {
     }
 
     private void saveOnParse() {
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseModel.KID_CLASS);
+        ParseQuery<ParseObject> query = new ParseQuery<>(ParseModel.KID_CLASS);
         query.getInBackground(objectId, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
                 if (e == null){
                     parseObject.put(ParseModel.TALK_COLUMN, mTalk.isChecked());
                     parseObject.put(ParseModel.ASSISTANCE_COLUMN, mAssistance.isChecked());
+                    parseObject.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e != null){
+                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         });
     }
 
-    void getFromParse(String kidName){
+    void getKidFromParse(String kidName){
         ParseQuery<ParseObject> query = new ParseQuery<>(ParseModel.KID_CLASS).whereContains(ParseModel.KID_NAME_COLUMN, kidName);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override

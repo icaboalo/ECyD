@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  */
 public class KidInfoDialog extends DialogFragment {
 
-    String objectId;
+    String mObjectId;
 
     @Bind(R.id.kid_name)
     TextView mKidName;
@@ -70,7 +70,7 @@ public class KidInfoDialog extends DialogFragment {
         alertDialog.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                saveOnParse();
+                saveOnParse(mObjectId, false);
             }
         });
         alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -79,25 +79,35 @@ public class KidInfoDialog extends DialogFragment {
                 dialog.dismiss();
             }
         });
+        alertDialog.setNeutralButton("DELETE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                saveOnParse(mObjectId, true);
+            }
+        });
         alertDialog.setCancelable(true);
     }
 
-    private void saveOnParse() {
+    private void saveOnParse(String objectId, final boolean delete) {
         ParseQuery<ParseObject> query = new ParseQuery<>(ParseModel.KID_CLASS);
         query.getInBackground(objectId, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
                 if (e == null){
-                    parseObject.put(ParseModel.TALK_COLUMN, mTalk.isChecked());
-                    parseObject.put(ParseModel.ASSISTANCE_COLUMN, mAssistance.isChecked());
-                    parseObject.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e != null){
-                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    if (delete == true){
+                        parseObject.deleteInBackground();
+                    }else {
+                        parseObject.put(ParseModel.TALK_COLUMN, mTalk.isChecked());
+                        parseObject.put(ParseModel.ASSISTANCE_COLUMN, mAssistance.isChecked());
+                        parseObject.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e != null){
+                                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         });
@@ -110,7 +120,7 @@ public class KidInfoDialog extends DialogFragment {
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null){
                     for (int i = 0; i < list.size(); i++) {
-                        objectId = list.get(i).getObjectId();
+                        mObjectId = list.get(i).getObjectId();
                         String kidName = list.get(i).getString(ParseModel.KID_NAME_COLUMN);
                         String teamName = list.get(i).getString(ParseModel.TEAM_NAME_COLUMN);
                         boolean assistance = list.get(i).getBoolean(ParseModel.ASSISTANCE_COLUMN);
